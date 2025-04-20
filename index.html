@@ -1,37 +1,32 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Firebase Pong</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2048 - Web User Ent.</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 </head>
 <body>
-  <div id="loginScreen">
-    <h2>Login</h2>
-    <input type="text" id="usernameInput" placeholder="Enter your username">
-    <button onclick="loginUser()">Login</button>
+  <div id="authScreen" class="screen">
+    <h2>🔐 Login with your account to play</h2>
+    <input type="text" id="authUsername" placeholder="Username" /><br />
+    <input type="password" id="authPassword" placeholder="Password" /><br />
+    <input type="file" id="avatarInput" accept="image/*" /><br />
+    <img id="avatarPreview" style="width:50px;height:50px;display:none;margin:5px 0;border-radius:50%;" />
+    <button onclick="submitAuth()">Submit</button>
+    <p style="margin-top:10px;">
+      <a href="#" onclick="toggleAuthMode()">Switch to Register/Login</a>
+    </p>
   </div>
 
-  <div id="lobbyScreen" style="display:none;">
-    <h2>Welcome, <span id="currentUser"></span></h2>
-    <button onclick="createRoom()">Create Room</button>
-    <input id="joinCode" placeholder="Enter Room Code">
-    <button onclick="joinRoom()">Join Room</button>
-    <h3>🏆 Leaderboard</h3>
-    <div id="leaderboard"></div>
-  </div>
-
-  <div id="gameScreen" style="display:none;">
-    <h1>1vs1 Pong</h1>
-    <canvas id="gameCanvas"></canvas>
-    <div class="instructions">
-      <p><img id="leftAvatar" class="avatar"> <span id="leftPlayerLabel"></span>: W / S</p>
-      <p><img id="rightAvatar" class="avatar"> <span id="rightPlayerLabel"></span>: ⬆ / ⬇</p>
-      <p>Press <strong>Space</strong> to start. Countdown: <span id="countdownText">5</span></p>
+  <div id="gameScreen" class="game-container hidden">
+    <h1>2048</h1>
+    <p id="playerName"></p>
+    <div class="game-board"></div>
+    <div class="game-controls">
+      <button class="restart-btn">Restart</button>
     </div>
   </div>
 
